@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+  <h2 class="fw-bold text-center mb-4">📩 Contact Us</h2>
+
+  {% if request.GET.sent %}
+  <div class="alert alert-success text-center">
+      ✅ お問い合わせ内容を受け取りました！
+  </div>
+  {% endif %}
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm rounded-4">
+        <div class="card-body p-4">
+
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} text-center">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+            <div class="text-center">
+              <button type="submit" class="btn btn-dark">Send</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

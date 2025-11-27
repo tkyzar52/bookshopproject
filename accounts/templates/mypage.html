@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Page{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h2>Hello, {{ user.username }} </h2>
+
+    <div class="card mt-4 text-center">
+        <div class="card-body">
+            <h4>Your Information</h4>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Last login:</strong> {{ user.last_login }}</p>
+            <p><strong>Date joined:</strong> {{ user.date_joined }}</p>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex justify-content-center gap-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary fw-bold" 
+                    onclick="location.href='{% url 'accounts:logout' %}'"> Logout </button>
+
+        </div><br></br>
+    </div>
+    <br></br>
+</div>
+{% endblock %}

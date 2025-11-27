@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Your Cart{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="fw-bolder mb-4 text-dark">🛒 Your Cart</h2>
+
+    <div class="card shadow-sm rounded-4">
+        <div class="card-body p-4">
+
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Book</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Qty</th>
+                        <th class="text-center">Subtotal</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td class="fw-semibold">{{ item.book.title }}</td>
+                        <td class="text-center">¥{{ item.book.price }}</td>
+                        <td class="text-center">{{ item.quantity }}</td>
+                        <td class="text-center">¥{{ item.subtotal }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'bookshop:remove_cart_item' item.id %}" class="btn btn-sm btn-danger">
+                                🗑 削除
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4" class="text-center text-muted">カートは空です</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <hr>
+
+            <div class="text-end">
+                <h5 class="text-muted">Total Items: {{ cart }}</h5>
+                <h3 class="fw-bold text-dark">Total Price: ¥{{ total }}</h3>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
